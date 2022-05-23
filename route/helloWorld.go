@@ -1,13 +1,16 @@
 package route
 
 import (
-	"net/http"
-
 	"github.com/andreabreu76/gomysql_v2/handler"
+	"github.com/gorilla/mux"
 )
 
 func SetupRoutes() {
 
-	http.HandleFunc("/", handler.Hello)
+	router := mux.NewRouter()
+
+	v1 := router.PathPrefix("/v1").Subrouter()
+
+	v1.HandleFunc("/", handler.Hello).Methods("GET")
 
 }
